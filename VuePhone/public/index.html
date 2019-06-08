@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <script src="./js/mui.min.js"></script>
+    <title>phone</title>
+    <script>
+      mui.init({
+        swipeBack: false, //关闭右滑关闭功能（默认就是false）
+        keyEventBind: {
+          backbutton: true //开启back按键监听（默认就是true）
+        }
+      });
+      var quitTime = null;
+      mui.plusReady(function(){
+        mui.back = function(){
+          //首次按键，提示‘再按一次退出应用’
+          if (!quitTime) {
+            //记录第一次按下回退键的时间
+            quitTime = new Date().getTime();
+            //回退到上一页面
+            window.history.back();
+            setTimeout(function() {
+              //1s中后清除
+              quitTime = null;
+            }, 1000);
+          }else{
+            if((new Date().getTime() - quitTime) < 1000){
+              quitTime = null;
+              plus.runtime.quit();
+            }
+          }
+        };
+      });
+    </script>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but phone doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>

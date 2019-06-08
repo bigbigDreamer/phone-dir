@@ -1,0 +1,14 @@
+header h1{
+    text-align: center;
+    color: #42b983;
+}
+
+main{
+    width: 100%;
+}
+main table{
+    margin: 50px auto;
+    border-collapse: collapse;
+    width: 70%
+
+}

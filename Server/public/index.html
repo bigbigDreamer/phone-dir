@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册后台</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
+</head>
+<body>
+<header><h1>电话簿后台</h1></header>
+<main>
+    <table>
+        <caption>联系人添加</caption>
+        <colgroup>
+            <col style="background-color: #42b983">
+            <col style="background-color: springgreen">
+            <col style="background-color: deeppink">
+            <col style="background-color: burlywood">
+            <col style="background-color: aqua">
+        </colgroup>
+        <thead>
+        <tr>
+            <th>姓名</th>
+            <th>电话</th>
+            <th>微信号</th>
+            <th>qq</th>
+            <th>头像地址</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <input type='text' placeholder="请输入姓名" id="username"/>
+            </td>
+            <td><input type="text" placeholder="请输入电话" id="telephone"/></td>
+            <td><input type="text" placeholder="请输入微信号" id="wechat"/></td>
+            <td><input type="text" placeholder="请输入qq号" id="qq"/></td>
+            <td><input type="text" placeholder="请输入头像地址" id="avatar"/></td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="5" style="text-align: center">
+                <button style="width: 80px;height: 40px;background-color: springgreen;outline: unset;border-radius: 8px;color: white"
+                        id="btn">添加
+                </button>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</main>
+
+<script>
+    const $ = function (selector) {
+        return document.querySelector(selector);
+    };
+        document.querySelector('#btn').addEventListener('click',()=>{
+
+            let username = $("#username").value;
+            let telephone = $("#telephone").value;
+            const wechat = $("#wechat").value;
+            const qq = $("#qq").value;
+            const avatar = $("#avatar").value;
+            const User = {
+                username,
+                telephone,
+                wechat,
+                qq,
+                avatar,
+            }
+            console.log(User)
+            axios.post('/sign',{User})
+                .then(data =>{
+                    console.log(data);
+                    if (data.data.status) {
+                        alert('添加成功');
+                    }
+                })
+                .catch(err => Promise.reject(err));
+        })
+</script>
+</body>
+</html>
